@@ -1,0 +1,27 @@
+{{ define "content" }}
+<section class="section">
+  <div class="container">
+    <h1 class="title">{{ .Title }}</h1>
+    {{ with .Data }}
+      <div class="box">
+        <p><strong>Orden:</strong> #{{ .Orden.OrdenID }}</p>
+        <p><strong>Fecha:</strong> {{ .Orden.Fecha }}</p>
+        <p><strong>Total:</strong> ${{ .Orden.Total }}</p>
+      </div>
+      <table class="table is-fullwidth">
+        <thead><tr><th>Producto</th><th>Cant.</th><th>Precio</th><th>Subtotal</th></tr></thead>
+        <tbody>
+          {{ range .Items }}
+          <tr>
+            <td>{{ .Nombre }}</td>
+            <td>{{ .Cantidad }}</td>
+            <td>${{ .PrecioUnitario }}</td>
+            <td>${{ .Subtotal }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
