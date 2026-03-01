@@ -1,0 +1,41 @@
+{{ define "content" }}
+<section class="section">
+  <div class="container">
+    <h1 class="title">{{ .Title }}</h1>
+
+    {{ with .Data }}
+      <table class="table is-fullwidth">
+        <thead>
+          <tr><th>Producto</th><th>Precio</th><th>Cant.</th><th>Subtotal</th></tr>
+        </thead>
+        <tbody>
+          {{ range .Items }}
+          <tr>
+            <td>{{ .Nombre }}</td>
+            <td>${{ .Precio }}</td>
+            <td>{{ .Cantidad }}</td>
+            <td>${{ .Subtotal }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="3" class="has-text-right">Total:</th>
+            <th>${{ .Total }}</th>
+          </tr>
+        </tfoot>
+      </table>
+
+      {{ if gt .Total 0.0 }}
+        <form action="/orden/crear" method="POST">
+          <button class="button is-primary">Confirmar compra</button>
+        </form>
+      {{ else }}
+        <div class="notification is-light">Tu carrito está vacío.</div>
+        /carritoVolver al carrito</a>
+      {{ end }}
+
+    {{ end }}
+  </div>
+</section>
+{{ end }}
